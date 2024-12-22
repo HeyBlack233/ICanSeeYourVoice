@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "visualsound",
+  "version": "${version}",
+  "name": "ICanSeeYourVoice",
+  "description": "Your noise is hurting my eyes!",
+  "authors": [
+    "HeyBlack"
+  ],
+  "contact": {
+    "repo": "https://github.com/HeyBlack/ICanSeeYourVoice"
+  },
+  "license": "LGPL-3.0",
+  "icon": "assets/visualsound/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "heyblack.visualsound.VisualSound"
+    ],
+    "modmenu": [
+      "heyblack.visualsound.util.VisualSoundModMenuApiImpl"
+    ]
+  },
+  "mixins": [
+    "visualsound.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

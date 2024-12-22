@@ -1,0 +1,14 @@
+{
+  "text.autoconfig.visualsound.title": "I Can See Your Voice Config",
+  "text.autoconfig.visualsound.category.general": "General",
+  "text.autoconfig.visualsound.category.text": "Text",
+  "text.autoconfig.visualsound.category.other": "Other",
+  "text.autoconfig.visualsound.option.main_toggle": "Enable Mod",
+  "text.autoconfig.visualsound.option.debug": "Debug Mode",
+  "text.autoconfig.visualsound.option.time": "Text Display Duration (ms)",
+  "text.autoconfig.visualsound.option.range": "Max Range",
+  "text.autoconfig.visualsound.option.max_count": "Max Count",
+  "text.autoconfig.visualsound.option.text_color": "Text Color",
+  "text.autoconfig.visualsound.option.use_bg": "Use Background",
+  "text.autoconfig.visualsound.option.use_shadow": "Use Shadow"
+}
