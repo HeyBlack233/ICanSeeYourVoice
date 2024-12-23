@@ -73,7 +73,7 @@ public class VSTextRenderer {
                     } else {
                         textRenderer.draw(
                                 "... +" + (contents.size() - 5),
-                                offset,
+                                offset1,
                                 0,
                                 color,
                                 true,
