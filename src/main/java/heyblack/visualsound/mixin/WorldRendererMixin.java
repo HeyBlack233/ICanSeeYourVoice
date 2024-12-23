@@ -15,15 +15,13 @@ public class WorldRendererMixin {
     @Inject(
             method = "render",
             at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/render/WorldRenderer;renderWorldBorder(Lnet/minecraft/client/render/Camera;)V",
-                    shift = At.Shift.AFTER
+                    value = "TAIL"
             )
     )
     private void renderVisualSound(MatrixStack matrices, float tickDelta, long limitTime, boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightmapTextureManager, Matrix4f matrix4f, CallbackInfo ci) {
         if (VisualSound.config.main_toggle) {
             VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders().getEffectVertexConsumers();
-            VisualSound.textManager.tick(matrices, immediate, camera);
+            VisualSound.textManager.tick(matrices, immediate);
         }
     }
 }

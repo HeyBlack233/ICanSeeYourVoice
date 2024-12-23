@@ -32,8 +32,8 @@ public class VSTextManager implements SoundInstanceListener {
         BlockPos pos = new BlockPos(sound.getX(), sound.getY(), sound.getZ());
 
         if (
-                VSTexts.size() <= VisualSound.config.max_count &&
-                (pos.getSquaredDistance(MinecraftClient.getInstance().player.getBlockPos())) < (VisualSound.config.range ^ 2)
+                VSTexts.size() < VisualSound.config.max_count &&
+                (pos.getSquaredDistance(MinecraftClient.getInstance().player.getBlockPos())) < (VisualSound.config.range * VisualSound.config.range)
         ) {
             VSText text = new VSText(soundSet, pos);
             VSTexts.add(text);
@@ -52,7 +52,7 @@ public class VSTextManager implements SoundInstanceListener {
         }
     }
 
-    public void tick(MatrixStack matrixStack, VertexConsumerProvider.Immediate immediate, Camera camera) {
+    public void tick(MatrixStack matrixStack, VertexConsumerProvider.Immediate immediate) {
         Set<BlockPos> posSet = new HashSet<>();
 
         // handle existing texts
@@ -88,7 +88,7 @@ public class VSTextManager implements SoundInstanceListener {
 
             Map<String, Integer> contents = posContentsMap.get(pos);
 
-            VSTextRenderer.renderContents(pos, contents, matrixStack, immediate, camera);
+            VSTextRenderer.renderContents(pos, contents, matrixStack, immediate);
         }
     }
 

@@ -19,17 +19,15 @@ public class VisualSoundConfig implements ConfigData {
     public int max_count = 128;
 
     @ConfigEntry.Category("text")
-    @ConfigEntry.ColorPicker(allowAlpha = true)
-    public int text_color = 0xFFFFFFFF;
+    @ConfigEntry.ColorPicker
+    public int text_color = 0xFFFFFF;
+
+    @ConfigEntry.Category("text")
+    @ConfigEntry.BoundedDiscrete(min = 32, max = 255)
+    public int text_alpha = 255;
 
     @ConfigEntry.Category("text")
     public boolean use_bg = true;
-
-    @ConfigEntry.Category("text")
-    public boolean use_shadow = false;
-
-    @ConfigEntry.Category("other")
-    public boolean debug = false;
 
     @Override
     public void validatePostLoad() throws ValidationException {
