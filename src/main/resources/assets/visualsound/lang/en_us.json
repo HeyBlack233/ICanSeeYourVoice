@@ -5,7 +5,6 @@
   "text.autoconfig.visualsound.option.main_toggle": "Enable Mod",
   "text.autoconfig.visualsound.option.debug": "Debug Mode",
   "text.autoconfig.visualsound.option.time": "Text Display Duration (ms)",
-  "text.autoconfig.visualsound.option.range": "Max Range",
   "text.autoconfig.visualsound.option.max_count": "Max Count",
   "text.autoconfig.visualsound.option.text_color": "Text Color (#rrggbb)",
   "text.autoconfig.visualsound.option.text_alpha": "Text Alpha",

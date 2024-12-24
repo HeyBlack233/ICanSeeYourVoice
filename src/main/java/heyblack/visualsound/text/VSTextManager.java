@@ -32,10 +32,7 @@ public class VSTextManager implements SoundInstanceListener {
     public void addText(SoundInstance sound, WeightedSoundSet soundSet) {
         BlockPos pos = new BlockPos(sound.getX(), sound.getY(), sound.getZ());
 
-        if (
-                VSTexts.size() < VisualSoundConfig.max_count &&
-                (pos.getSquaredDistance(MinecraftClient.getInstance().player.getBlockPos())) < (VisualSoundConfig.range * VisualSoundConfig.range)
-        ) {
+        if (VSTexts.size() < VisualSoundConfig.max_count) {
             VSText text = new VSText(soundSet, pos);
             VSTexts.add(text);
 

@@ -13,9 +13,6 @@ public class VisualSoundConfig implements ConfigData {
     public static int time = 2000;
 
     @ConfigEntry.Category("general")
-    public static int range = 64;
-
-    @ConfigEntry.Category("general")
     public static int max_count = 128;
 
     @ConfigEntry.Category("text")
