@@ -2,7 +2,6 @@ package heyblack.visualsound.text;
 
 import heyblack.visualsound.config.VisualSoundConfig;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.sound.SoundInstance;
@@ -30,14 +29,14 @@ public class VSTextManager implements SoundInstanceListener {
     private final Map<BlockPos, Map<String, Integer>> posContentsMap = new LinkedHashMap<>();
 
     public void addText(SoundInstance sound, WeightedSoundSet soundSet) {
-        BlockPos pos = new BlockPos(sound.getX(), sound.getY(), sound.getZ());
+        BlockPos pos = BlockPos.ofFloored(sound.getX(), sound.getY(), sound.getZ());
 
         if (VSTexts.size() < VisualSoundConfig.max_count) {
             VSText text = new VSText(soundSet, pos);
             VSTexts.add(text);
 
             Map<String, Integer> contents = Optional.ofNullable(posContentsMap.get(pos)).orElse(new LinkedHashMap<>());
-            String content = text.getDisplayContent().getString();
+            String content = text.getDisplayContent();
 
             if (contents.containsKey(content)) {
                 int i = contents.get(content);
@@ -52,7 +51,6 @@ public class VSTextManager implements SoundInstanceListener {
 
     public void tick(MatrixStack matrixStack, VertexConsumerProvider.Immediate immediate) {
         EntityRenderDispatcher dispatcher = MinecraftClient.getInstance().getEntityRenderDispatcher();
-        Camera camera = dispatcher.camera;
         Set<BlockPos> posSet = new HashSet<>();
 
         // handle existing texts
@@ -61,7 +59,7 @@ public class VSTextManager implements SoundInstanceListener {
             VSText text = iterator.next();
 
             BlockPos pos = text.getPos();
-            String content = text.getDisplayContent().getString();
+            String content = text.getDisplayContent();
 
             if (text.isEnded(Util.getMeasuringTimeMs())) {
                 Map<String, Integer> contents = posContentsMap.get(pos);

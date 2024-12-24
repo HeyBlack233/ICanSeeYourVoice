@@ -8,9 +8,9 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Matrix4f;
-import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3d;
+import org.joml.Matrix4f;
+import org.joml.Quaternionf;
 
 import java.util.Map;
 
@@ -51,12 +51,12 @@ public class VSTextRenderer {
                 matrixStack.push();
                 matrixStack.translate(vec3d.x, vec3d.y, vec3d.z);
 
-                Quaternion rotation = dispatcher.camera.getRotation().copy();
+                Quaternionf rotation = dispatcher.camera.getRotation();
                 matrixStack.multiply(rotation);
 
                 matrixStack.scale(-0.025F, -0.025F, 0.025F);
 
-                Matrix4f matrix4f = matrixStack.peek().getModel();
+                Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
 
                 float offset = (float)(-textRenderer.getWidth(entry.getKey())) / 2.0F;
 
@@ -66,8 +66,8 @@ public class VSTextRenderer {
 
                 if (i == 5) {
                     if (useBg) {
-                        textRenderer.draw("... +" + (contents.size() - 5), offset1, 0, getARGB(32, VisualSoundConfig.text_color), false, matrix4f, immediate, true, 0x50000000, 15728640);
-                        textRenderer.draw("... +" + (contents.size() - 5), offset1, 0, getARGB(getInputAlphaWithTargetBlendedValue(32, alpha), VisualSoundConfig.text_color), false, matrix4f, immediate, false, 0, 15728640);
+                        textRenderer.draw("... +" + (contents.size() - 5), offset1, 0, getARGB(32, VisualSoundConfig.text_color), false, matrix4f, immediate, TextRenderer.TextLayerType.SEE_THROUGH, 0x50000000, 15728640);
+                        textRenderer.draw("... +" + (contents.size() - 5), offset1, 0, getARGB(getInputAlphaWithTargetBlendedValue(32, alpha), VisualSoundConfig.text_color), false, matrix4f, immediate, TextRenderer.TextLayerType.NORMAL, 0, 15728640);
                     } else {
                         textRenderer.draw(
                                 "... +" + (contents.size() - 5),
@@ -77,7 +77,7 @@ public class VSTextRenderer {
                                 true,
                                 matrix4f,
                                 immediate,
-                                true,
+                                TextRenderer.TextLayerType.SEE_THROUGH,
                                 0,
                                 15728640
                         );
@@ -85,8 +85,8 @@ public class VSTextRenderer {
                     }
                 } else {
                     if (useBg) {
-                        textRenderer.draw(content, offset, 0, getARGB(32, VisualSoundConfig.text_color), false, matrix4f, immediate, true, 0x50000000, 15728640);
-                        textRenderer.draw(content, offset, 0, getARGB(getInputAlphaWithTargetBlendedValue(32, alpha), VisualSoundConfig.text_color), false, matrix4f, immediate, false, 0, 15728640);
+                        textRenderer.draw(content, offset, 0, getARGB(32, VisualSoundConfig.text_color), false, matrix4f, immediate, TextRenderer.TextLayerType.SEE_THROUGH, 0x50000000, 15728640);
+                        textRenderer.draw(content, offset, 0, getARGB(getInputAlphaWithTargetBlendedValue(32, alpha), VisualSoundConfig.text_color), false, matrix4f, immediate, TextRenderer.TextLayerType.NORMAL, 0, 15728640);
                     } else {
                         textRenderer.draw(
                                 content,
@@ -96,7 +96,7 @@ public class VSTextRenderer {
                                 true,
                                 matrix4f,
                                 immediate,
-                                true,
+                                TextRenderer.TextLayerType.SEE_THROUGH,
                                 0,
                                 15728640
                         );

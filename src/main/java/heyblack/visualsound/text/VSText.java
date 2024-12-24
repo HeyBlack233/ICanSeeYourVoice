@@ -2,18 +2,19 @@ package heyblack.visualsound.text;
 
 import heyblack.visualsound.config.VisualSoundConfig;
 import net.minecraft.client.sound.WeightedSoundSet;
-import net.minecraft.text.Text;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 
+import java.util.Optional;
+
 public class VSText {
     private final BlockPos pos;
-    private final Text displayContent;
+    private final String displayContent;
 
     private final long creationTime = Util.getMeasuringTimeMs();
 
     public VSText(WeightedSoundSet soundSet, BlockPos pos) {
-        this.displayContent = soundSet.getSubtitle();
+        this.displayContent = soundSet.getSubtitle().getString();
         this.pos = pos;
     }
 
@@ -25,7 +26,7 @@ public class VSText {
         return pos;
     }
 
-    public Text getDisplayContent() {
-        return displayContent;
+    public String getDisplayContent() {
+        return Optional.ofNullable(displayContent).orElse(" ");
     }
 }
