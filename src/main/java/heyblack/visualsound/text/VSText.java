@@ -1,8 +1,6 @@
 package heyblack.visualsound.text;
 
-import heyblack.visualsound.VisualSound;
 import heyblack.visualsound.config.VisualSoundConfig;
-import net.minecraft.client.sound.Sound;
 import net.minecraft.client.sound.WeightedSoundSet;
 import net.minecraft.text.Text;
 import net.minecraft.util.Util;

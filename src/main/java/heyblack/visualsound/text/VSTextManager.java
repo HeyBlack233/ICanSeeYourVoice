@@ -1,10 +1,10 @@
 package heyblack.visualsound.text;
 
-import heyblack.visualsound.VisualSound;
 import heyblack.visualsound.config.VisualSoundConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.client.sound.SoundInstanceListener;
 import net.minecraft.client.sound.WeightedSoundSet;
@@ -51,6 +51,8 @@ public class VSTextManager implements SoundInstanceListener {
     }
 
     public void tick(MatrixStack matrixStack, VertexConsumerProvider.Immediate immediate) {
+        EntityRenderDispatcher dispatcher = MinecraftClient.getInstance().getEntityRenderDispatcher();
+        Camera camera = dispatcher.camera;
         Set<BlockPos> posSet = new HashSet<>();
 
         // handle existing texts
@@ -86,7 +88,7 @@ public class VSTextManager implements SoundInstanceListener {
 
             Map<String, Integer> contents = posContentsMap.get(pos);
 
-            VSTextRenderer.renderContents(pos, contents, matrixStack, immediate);
+            VSTextRenderer.renderContentsInWorld(pos, contents, matrixStack, immediate, dispatcher);
         }
     }
 

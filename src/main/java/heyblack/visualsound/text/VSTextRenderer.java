@@ -1,6 +1,5 @@
 package heyblack.visualsound.text;
 
-import heyblack.visualsound.VisualSound;
 import heyblack.visualsound.config.VisualSoundConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
@@ -8,7 +7,6 @@ import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Quaternion;
@@ -17,9 +15,8 @@ import net.minecraft.util.math.Vec3d;
 import java.util.Map;
 
 public class VSTextRenderer {
-    public static void renderContents(BlockPos blockPos, Map<String, Integer> contents, MatrixStack matrixStack, VertexConsumerProvider.Immediate immediate) {
+    public static void renderContentsInWorld(BlockPos blockPos, Map<String, Integer> contents, MatrixStack matrixStack, VertexConsumerProvider.Immediate immediate, EntityRenderDispatcher dispatcher) {
         MinecraftClient client = MinecraftClient.getInstance();
-        EntityRenderDispatcher dispatcher = client.getEntityRenderDispatcher();
         Camera camera = dispatcher.camera;
 
         if (camera != null) {
