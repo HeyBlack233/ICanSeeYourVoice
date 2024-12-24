@@ -1,6 +1,7 @@
 package heyblack.visualsound.text;
 
 import heyblack.visualsound.VisualSound;
+import heyblack.visualsound.config.VisualSoundConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.Camera;
@@ -62,14 +63,14 @@ public class VSTextRenderer {
 
                 float offset = (float)(-textRenderer.getWidth(entry.getKey())) / 2.0F;
 
-                int alpha = VisualSound.config.text_alpha;
-                int color = getARGB(alpha, VisualSound.config.text_color);
-                boolean useBg = VisualSound.config.use_bg;
+                int alpha = VisualSoundConfig.text_alpha;
+                int color = getARGB(alpha, VisualSoundConfig.text_color);
+                boolean useBg = VisualSoundConfig.use_bg;
 
                 if (i == 5) {
                     if (useBg) {
-                        textRenderer.draw("... +" + (contents.size() - 5), offset1, 0, getARGB(32, VisualSound.config.text_color), false, matrix4f, immediate, true, 0x50000000, 15728640);
-                        textRenderer.draw("... +" + (contents.size() - 5), offset1, 0, getARGB(getInputAlphaWithTargetBlendedValue(32, alpha), VisualSound.config.text_color), false, matrix4f, immediate, false, 0, 15728640);
+                        textRenderer.draw("... +" + (contents.size() - 5), offset1, 0, getARGB(32, VisualSoundConfig.text_color), false, matrix4f, immediate, true, 0x50000000, 15728640);
+                        textRenderer.draw("... +" + (contents.size() - 5), offset1, 0, getARGB(getInputAlphaWithTargetBlendedValue(32, alpha), VisualSoundConfig.text_color), false, matrix4f, immediate, false, 0, 15728640);
                     } else {
                         textRenderer.draw(
                                 "... +" + (contents.size() - 5),
@@ -87,8 +88,8 @@ public class VSTextRenderer {
                     }
                 } else {
                     if (useBg) {
-                        textRenderer.draw(content, offset, 0, getARGB(32, VisualSound.config.text_color), false, matrix4f, immediate, true, 0x50000000, 15728640);
-                        textRenderer.draw(content, offset, 0, getARGB(getInputAlphaWithTargetBlendedValue(32, alpha), VisualSound.config.text_color), false, matrix4f, immediate, false, 0, 15728640);
+                        textRenderer.draw(content, offset, 0, getARGB(32, VisualSoundConfig.text_color), false, matrix4f, immediate, true, 0x50000000, 15728640);
+                        textRenderer.draw(content, offset, 0, getARGB(getInputAlphaWithTargetBlendedValue(32, alpha), VisualSoundConfig.text_color), false, matrix4f, immediate, false, 0, 15728640);
                     } else {
                         textRenderer.draw(
                                 content,

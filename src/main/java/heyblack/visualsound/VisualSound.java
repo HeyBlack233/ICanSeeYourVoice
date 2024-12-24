@@ -17,15 +17,10 @@ public class VisualSound implements ClientModInitializer {
 
     public static VSTextManager textManager;
 
-    public static VisualSoundConfig config;
-
     @Override
     public void onInitializeClient() {
         AutoConfig.register(VisualSoundConfig.class, GsonConfigSerializer::new);
 
-        ClientLifecycleEvents.CLIENT_STARTED.register(client -> {
-            textManager = VSTextManager.getInstance();
-            config = AutoConfig.getConfigHolder(VisualSoundConfig.class).getConfig();
-        });
+        ClientLifecycleEvents.CLIENT_STARTED.register(client -> textManager = VSTextManager.getInstance());
     }
 }
