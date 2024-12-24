@@ -1,13 +1,11 @@
 package heyblack.visualsound.text;
 
 import heyblack.visualsound.config.VisualSoundConfig;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.client.sound.SoundInstanceListener;
 import net.minecraft.client.sound.WeightedSoundSet;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 
@@ -49,8 +47,7 @@ public class VSTextManager implements SoundInstanceListener {
         }
     }
 
-    public void tick(MatrixStack matrixStack, VertexConsumerProvider.Immediate immediate) {
-        EntityRenderDispatcher dispatcher = MinecraftClient.getInstance().getEntityRenderDispatcher();
+    public void tick(WorldRenderContext context) {
         Set<BlockPos> posSet = new HashSet<>();
 
         // handle existing texts
@@ -86,12 +83,12 @@ public class VSTextManager implements SoundInstanceListener {
 
             Map<String, Integer> contents = posContentsMap.get(pos);
 
-            VSTextRenderer.renderContentsInWorld(pos, contents, matrixStack, immediate, dispatcher);
+            VSTextRenderer.renderContentsInWorld(pos, contents, context);
         }
     }
 
     @Override
-    public void onSoundPlayed(SoundInstance sound, WeightedSoundSet soundSet) {
+    public void onSoundPlayed(SoundInstance sound, WeightedSoundSet soundSet, float range) {
         if (VisualSoundConfig.main_toggle) {
             if (soundSet.getSubtitle() != null) {
                 this.addText(sound, soundSet);

@@ -1,11 +1,11 @@
 package heyblack.visualsound.text;
 
 import heyblack.visualsound.config.VisualSoundConfig;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -15,9 +15,10 @@ import org.joml.Quaternionf;
 import java.util.Map;
 
 public class VSTextRenderer {
-    public static void renderContentsInWorld(BlockPos blockPos, Map<String, Integer> contents, MatrixStack matrixStack, VertexConsumerProvider.Immediate immediate, EntityRenderDispatcher dispatcher) {
+    public static void renderContentsInWorld(BlockPos blockPos, Map<String, Integer> contents, WorldRenderContext context) {
         MinecraftClient client = MinecraftClient.getInstance();
-        Camera camera = dispatcher.camera;
+        Camera camera = context.camera();
+        VertexConsumerProvider.Immediate immediate = client.getBufferBuilders().getEntityVertexConsumers();
 
         if (camera != null) {
             float offset1 = 0;
@@ -46,12 +47,13 @@ public class VSTextRenderer {
                         blockPos.getZ() + 0.5
                 );
 
-                Vec3d vec3d = linePos.subtract(dispatcher.camera.getPos());
+                Vec3d vec3d = linePos.subtract(camera.getPos());
 
+                MatrixStack matrixStack = context.matrixStack();
                 matrixStack.push();
                 matrixStack.translate(vec3d.x, vec3d.y, vec3d.z);
 
-                Quaternionf rotation = dispatcher.camera.getRotation();
+                Quaternionf rotation = camera.getRotation();
                 matrixStack.multiply(rotation);
 
                 matrixStack.scale(-0.025F, -0.025F, 0.025F);

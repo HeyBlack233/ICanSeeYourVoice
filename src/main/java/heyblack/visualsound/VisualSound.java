@@ -6,6 +6,7 @@ import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,5 +23,7 @@ public class VisualSound implements ClientModInitializer {
         AutoConfig.register(VisualSoundConfig.class, GsonConfigSerializer::new);
 
         ClientLifecycleEvents.CLIENT_STARTED.register(client -> textManager = VSTextManager.getInstance());
+
+        WorldRenderEvents.LAST.register(context -> textManager.tick(context));
     }
 }

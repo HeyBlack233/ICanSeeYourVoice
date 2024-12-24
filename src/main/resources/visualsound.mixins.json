@@ -4,7 +4,6 @@
   "package": "heyblack.visualsound.mixin",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "WorldRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
