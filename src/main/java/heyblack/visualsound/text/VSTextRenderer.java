@@ -56,7 +56,7 @@ public class VSTextRenderer {
                 Quaternionf rotation = camera.getRotation();
                 matrixStack.multiply(rotation);
 
-                matrixStack.scale(-0.025F, -0.025F, 0.025F);
+                matrixStack.scale(0.025F, -0.025F, 0.025F);
 
                 Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
 
