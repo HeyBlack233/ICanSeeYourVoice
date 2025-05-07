@@ -116,6 +116,7 @@ public class VSTextRenderer {
         return (alpha << 24) | (red << 16) | (green << 8) | blue;
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static int getInputAlphaWithTargetBlendedValue(int inputFirst, int target) {
         float fI = inputFirst / 255.0f;
         float fT = target / 255.0f;
