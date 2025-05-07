@@ -1,0 +1,11 @@
+{
+  "text.autoconfig.visualsound.title": "I Can See Your Voice Config",
+  "text.autoconfig.visualsound.category.general": "通用",
+  "text.autoconfig.visualsound.category.style": "风格",
+  "text.autoconfig.visualsound.option.general.main_toggle": "启用Mod",
+  "text.autoconfig.visualsound.option.general.time": "文字显示时长 (ms)",
+  "text.autoconfig.visualsound.option.general.max_count": "最大文字数量",
+  "text.autoconfig.visualsound.option.style.text_color": "文字颜色 (#rrggbb)",
+  "text.autoconfig.visualsound.option.style.text_alpha": "文字透明度",
+  "text.autoconfig.visualsound.option.style.use_bg": "使用背景"
+}
