@@ -1,6 +1,6 @@
 package heyblack.visualsound.text;
 
-import heyblack.visualsound.config.VisualSoundConfig;
+import heyblack.visualsound.VisualSound;
 import net.minecraft.client.sound.WeightedSoundSet;
 import net.minecraft.text.Text;
 import net.minecraft.util.Util;
@@ -18,7 +18,7 @@ public class VSText {
     }
 
     public boolean isEnded(long currentTime) {
-        return currentTime - creationTime > VisualSoundConfig.time;
+        return currentTime - creationTime > VisualSound.getConfig().general.time;
     }
 
     public BlockPos getPos() {

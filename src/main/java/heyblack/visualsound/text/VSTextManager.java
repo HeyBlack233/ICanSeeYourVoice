@@ -1,6 +1,6 @@
 package heyblack.visualsound.text;
 
-import heyblack.visualsound.config.VisualSoundConfig;
+import heyblack.visualsound.VisualSound;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -32,7 +32,7 @@ public class VSTextManager implements SoundInstanceListener {
     public void addText(SoundInstance sound, WeightedSoundSet soundSet) {
         BlockPos pos = new BlockPos(sound.getX(), sound.getY(), sound.getZ());
 
-        if (VSTexts.size() < VisualSoundConfig.max_count) {
+        if (VSTexts.size() < VisualSound.getConfig().general.max_count) {
             VSText text = new VSText(soundSet, pos);
             VSTexts.add(text);
 
@@ -94,7 +94,7 @@ public class VSTextManager implements SoundInstanceListener {
 
     @Override
     public void onSoundPlayed(SoundInstance sound, WeightedSoundSet soundSet) {
-        if (VisualSoundConfig.main_toggle) {
+        if (VisualSound.getConfig().general.main_toggle) {
             if (soundSet.getSubtitle() != null) {
                 this.addText(sound, soundSet);
             }

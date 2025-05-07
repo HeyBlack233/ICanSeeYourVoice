@@ -1,6 +1,6 @@
 package heyblack.visualsound.text;
 
-import heyblack.visualsound.config.VisualSoundConfig;
+import heyblack.visualsound.VisualSound;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.Camera;
@@ -21,15 +21,15 @@ public class VSTextRenderer {
 
         if (camera != null) {
             float offset1 = 0;
-            int i = 0;
+            int lines = 0;
             for (Map.Entry<String, Integer> entry : contents.entrySet()) {
-                if (i > 5) {
+                if (lines > 5) {
                     return;
                 }
 
                 TextRenderer textRenderer = client.textRenderer;
 
-                if (i == 4) {
+                if (lines == 4) {
                     offset1 = (float)(-textRenderer.getWidth(entry.getKey())) / 2.0F;
                 }
 
@@ -42,7 +42,7 @@ public class VSTextRenderer {
                 }
                 Vec3d linePos = new Vec3d(
                         blockPos.getX() + 0.5,
-                        blockPos.getY() + 0.5 + (i * 0.225),
+                        blockPos.getY() + 0.5 + (lines * 0.225),
                         blockPos.getZ() + 0.5
                 );
 
@@ -60,14 +60,14 @@ public class VSTextRenderer {
 
                 float offset = (float)(-textRenderer.getWidth(entry.getKey())) / 2.0F;
 
-                int alpha = VisualSoundConfig.text_alpha;
-                int color = getARGB(alpha, VisualSoundConfig.text_color);
-                boolean useBg = VisualSoundConfig.use_bg;
+                int alpha = VisualSound.getConfig().style.text_alpha;
+                int color = getARGB(alpha, VisualSound.getConfig().style.text_color);
+                boolean useBg = VisualSound.getConfig().style.use_bg;
 
-                if (i == 5) {
+                if (lines == 5) {
                     if (useBg) {
-                        textRenderer.draw("... +" + (contents.size() - 5), offset1, 0, getARGB(32, VisualSoundConfig.text_color), false, matrix4f, immediate, true, 0x50000000, 15728640);
-                        textRenderer.draw("... +" + (contents.size() - 5), offset1, 0, getARGB(getInputAlphaWithTargetBlendedValue(32, alpha), VisualSoundConfig.text_color), false, matrix4f, immediate, false, 0, 15728640);
+                        textRenderer.draw("... +" + (contents.size() - 5), offset1, 0, getARGB(32, VisualSound.getConfig().style.text_color), false, matrix4f, immediate, true, 0x50000000, 15728640);
+                        textRenderer.draw("... +" + (contents.size() - 5), offset1, 0, getARGB(getInputAlphaWithTargetBlendedValue(32, alpha), VisualSound.getConfig().style.text_color), false, matrix4f, immediate, false, 0, 15728640);
                     } else {
                         textRenderer.draw(
                                 "... +" + (contents.size() - 5),
@@ -85,8 +85,8 @@ public class VSTextRenderer {
                     }
                 } else {
                     if (useBg) {
-                        textRenderer.draw(content, offset, 0, getARGB(32, VisualSoundConfig.text_color), false, matrix4f, immediate, true, 0x50000000, 15728640);
-                        textRenderer.draw(content, offset, 0, getARGB(getInputAlphaWithTargetBlendedValue(32, alpha), VisualSoundConfig.text_color), false, matrix4f, immediate, false, 0, 15728640);
+                        textRenderer.draw(content, offset, 0, getARGB(32, VisualSound.getConfig().style.text_color), false, matrix4f, immediate, true, 0x50000000, 15728640);
+                        textRenderer.draw(content, offset, 0, getARGB(getInputAlphaWithTargetBlendedValue(32, alpha), VisualSound.getConfig().style.text_color), false, matrix4f, immediate, false, 0, 15728640);
                     } else {
                         textRenderer.draw(
                                 content,
@@ -103,7 +103,7 @@ public class VSTextRenderer {
                     }
                 }
                 matrixStack.pop();
-                i++;
+                lines++;
             }
         }
     }

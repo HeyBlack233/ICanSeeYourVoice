@@ -1,7 +1,6 @@
 package heyblack.visualsound.mixin;
 
 import heyblack.visualsound.VisualSound;
-import heyblack.visualsound.config.VisualSoundConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
@@ -20,7 +19,7 @@ public class WorldRendererMixin {
             )
     )
     private void renderVisualSound(MatrixStack matrices, float tickDelta, long limitTime, boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightmapTextureManager, Matrix4f matrix4f, CallbackInfo ci) {
-        if (VisualSoundConfig.main_toggle) {
+        if (VisualSound.getConfig().general.main_toggle) {
             VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders().getEffectVertexConsumers();
             VisualSound.textManager.tick(matrices, immediate);
         }
